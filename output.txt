@@ -1,0 +1,7 @@
+8 5 13 10 4 7 
+13 5 8 4 10 7 
+13 5 8 4 10 7 
+No of nodes = 6
+Height is 2
+
+Executed In: 0.654 ms
