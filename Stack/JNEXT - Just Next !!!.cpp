@@ -1,4 +1,4 @@
-// Problem Link - 
+// Problem Link - https://www.spoj.com/problems/JNEXT/
 /* By Shubham Anand */
 #include<bits/stdc++.h>
 //#include<ext/pb_ds/assoc_container.hpp>
