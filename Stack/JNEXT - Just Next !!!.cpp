@@ -1,4 +1,4 @@
-// Problem Link - Given an array .you need to find the sum of maximum of all subaaray.
+// Problem Link - 
 /* By Shubham Anand */
 #include<bits/stdc++.h>
 //#include<ext/pb_ds/assoc_container.hpp>
@@ -54,68 +54,62 @@ void file_i_o()
 	#endif
 }
 
-
-
-
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
 
-	vector<int> arr{1,5,2,3};
-	int n=arr.size();
-	int ans=0;
-	vector<int> nge(n);
-	vector<int> pge(n);
-	stack<int> stk;
-	for(int i=0;i<n;i++){
-		while(!stk.empty() and arr[stk.top()]<arr[i]){
-			nge[stk.top()]=i;
-			int temp=stk.top();
-			stk.pop();
-			if(!stk.empty()){
-				pge[temp]=stk.top();
-			}
-			else{
-				pge[temp]=-1;
-			}
-
+	ll t;
+	cin>>t;
+	while(t--){
+		ll n;
+		cin>>n;
+		vector<ll> arr(n);
+		vector<ll> nge(n,-1);
+		loop(i,0,n-1){
+			cin>>arr[i];
 		}
-		stk.push(i);
-	}
-	while(!stk.empty()){
-		nge[stk.top()]=n;
-		int temp=stk.top();
-		// pge[stk.top()]=-1;
-		stk.pop();
-		if(!stk.empty()){
-				pge[temp]=stk.top();
+		stack<ll> stk;
+		for(ll i=0;i<n;i++){
+			while(!stk.empty() and arr[stk.top()]<arr[i]){
+				nge[stk.top()]=i;
+				stk.pop();
+			}
+			stk.push(i);
+		}
+		ll ind=n-1;
+		for(ll i=n-1;i>=0;i--){
+			if(nge[i]!=-1){
+				ind=i;
+				break;
+			}
+		}
+		if(ind==(n-1)){
+			cout<<"-1"<<endl;
+		}else{
+			ll val=arr[ind];
+			ll idx=ind;
+			for(ll j=n-1;j>ind;j--){
+				if(arr[j]>val){
+					val=arr[j];
+					idx=j;
+					break;
+				}
+			}
+			if(idx==ind){
+				cout<<"-1"<<endl;
 			}
 			else{
-				pge[temp]=-1;
+				swap(arr[ind],arr[idx]);
+				sort(arr.begin()+ind+1,arr.end());
+				for(ll i=0;i<n;i++){
+					cout<<arr[i];
+				}
+				cout<<endl;
 			}
+			
+		}
 	}
-
-	// for(int i=n-1;i>=0;i--){
-	// 	while(!stk.empty() and arr[stk.top()]<arr[i]){
-	// 		pge[stk.top()]=i;
-	// 		stk.pop();
-	// 	}
-	// 	stk.push(i);
-	// }
-	// while(!stk.empty()){
-	// 	pge[stk.top()]=-1;
-	// 	stk.pop();
-	// }
-
-	logarr(nge,0,n-1);
-	logarr(pge,0,n-1);
-
-
-	for(int i=0;i<n;i++){
-		ans+=(arr[i]*(i-pge[i])*(nge[i]-i));
-	}
-	cout<<ans<<endl;
 
 
 
